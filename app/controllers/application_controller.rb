@@ -7,4 +7,17 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+
+  def owner
+    "Curso Ruby on Rails"
+  end
+
+  def app_name
+    "Ventas v.1.0"
+  end
+
+  set_module :articles
+  set_module :clients
+  set_module :providers
+  set_module :sales
 end

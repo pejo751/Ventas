@@ -1,0 +1,1672 @@
+  [4;36;1mSQL (0.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (78.1ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (93.8ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateClients (20100727213235)
+  [4;35;1mSQL (0.0ms)[0m   [0mCREATE TABLE "clients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100727213235')[0m
+Migrating to CreateArticles (20100727213721)
+  [4;35;1mSQL (0.0ms)[0m   [0mCREATE TABLE "articles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "provider_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100727213721')[0m
+Migrating to CreateProviders (20100727214658)
+  [4;35;1mSQL (0.0ms)[0m   [0mCREATE TABLE "providers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100727214658')[0m
+Migrating to CreateSales (20100727215922)
+  [4;35;1mSQL (0.0ms)[0m   [0mCREATE TABLE "sales" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "client_id" integer, "expiration" date, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100727215922')[0m
+Migrating to HabtmSalesArticles (20100727221332)
+  [4;35;1mSQL (0.0ms)[0m   [0mCREATE TABLE "sales_articles" ("sale_id" integer, "article_id" integer) [0m
+  [4;36;1mSQL (15.6ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100727221332')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("articles")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("clients")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("providers")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("sales")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("sales_articles")[0m
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 20:59:49) [GET]
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (15.6ms)
+Rendered sales/_list (0.0ms)
+Rendered commons/_session (0.0ms)
+Completed in 1297ms (View: 313, DB: 0) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 20:59:53) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ArticlesController#index (for 127.0.0.1 at 2010-07-27 20:59:59) [GET]
+  [4;35;1mArticle Load (15.6ms)[0m   [0mSELECT * FROM "articles" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered articles/_list (15.6ms)
+Rendered commons/_session (0.0ms)
+Completed in 172ms (View: 125, DB: 16) | 200 OK [http://localhost/articles]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:00:00) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#index (for 127.0.0.1 at 2010-07-27 21:00:03) [GET]
+  [4;36;1mClient Load (0.0ms)[0m   [0;1mSELECT * FROM "clients" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered clients/_list (0.0ms)
+Rendered commons/_session (0.0ms)
+Completed in 250ms (View: 141, DB: 0) | 200 OK [http://localhost/clients]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:00:04) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ProvidersController#index (for 127.0.0.1 at 2010-07-27 21:00:06) [GET]
+  [4;35;1mProvider Load (15.6ms)[0m   [0mSELECT * FROM "providers" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (62.5ms)
+Rendered providers/_list (15.6ms)
+Rendered commons/_session (0.0ms)
+Completed in 266ms (View: 188, DB: 16) | 200 OK [http://localhost/providers]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:00:07) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:00:09) [GET]
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered sales/_list (0.0ms)
+Rendered commons/_session (0.0ms)
+Completed in 156ms (View: 94, DB: 0) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:00:10) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#index (for 127.0.0.1 at 2010-07-27 21:00:14) [GET]
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered clients/_list (0.0ms)
+Rendered commons/_session (0.0ms)
+Completed in 141ms (View: 109, DB: 0) | 200 OK [http://localhost/clients]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:00:15) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:01:49) [GET]
+  [4;36;1mSale Load (15.6ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (46.9ms)
+Rendered sales/_list (0.0ms)
+Rendered commons/_session (0.0ms)
+Completed in 203ms (View: 109, DB: 16) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:01:51) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#index (for 127.0.0.1 at 2010-07-27 21:04:27) [GET]
+  [4;35;1mClient Load (15.6ms)[0m   [0mSELECT * FROM "clients" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered clients/_list (0.0ms)
+Rendered commons/_session (15.6ms)
+Completed in 484ms (View: 94, DB: 16) | 200 OK [http://localhost/clients]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:04:28) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#new (for 127.0.0.1 at 2010-07-27 21:04:31) [GET]
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+Rendered clients/_form (15.6ms)
+Rendered commons/_session (0.0ms)
+Completed in 234ms (View: 188, DB: 0) | 200 OK [http://localhost/clients/new]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:04:32) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#create (for 127.0.0.1 at 2010-07-27 21:04:37) [POST]
+  Parameters: {"commit"=>"Save", "authenticity_token"=>"WuGCoeG5yO2VNkOgD+7iNsvCaUOiEbwMEdHtrEV4LTU=", "client"=>{"name"=>"jorge"}}
+  [4;36;1mClient Load (0.0ms)[0m   [0;1mSELECT "clients".id FROM "clients" WHERE ("clients"."name" = 'jorge') LIMIT 1[0m
+  [4;35;1mClient Create (46.9ms)[0m   [0mINSERT INTO "clients" ("name", "created_at", "updated_at") VALUES('jorge', '2010-07-28 00:04:37', '2010-07-28 00:04:37')[0m
+Redirected to http://localhost:3000/clients
+Completed in 781ms (DB: 47) | 302 Found [http://localhost/clients]
+
+
+Processing ClientsController#index (for 127.0.0.1 at 2010-07-27 21:04:38) [GET]
+  [4;36;1mClient Load (15.6ms)[0m   [0;1mSELECT * FROM "clients" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (78.1ms)
+Rendered clients/_list (46.9ms)
+Rendered commons/_session (15.6ms)
+Completed in 422ms (View: 359, DB: 16) | 200 OK [http://localhost/clients]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:04:41) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#new (for 127.0.0.1 at 2010-07-27 21:04:48) [GET]
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+Rendered clients/_form (0.0ms)
+Rendered commons/_session (0.0ms)
+Completed in 125ms (View: 78, DB: 0) | 200 OK [http://localhost/clients/new]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:04:49) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#create (for 127.0.0.1 at 2010-07-27 21:04:58) [POST]
+  Parameters: {"commit"=>"Save", "authenticity_token"=>"WuGCoeG5yO2VNkOgD+7iNsvCaUOiEbwMEdHtrEV4LTU=", "client"=>{"name"=>"ramirito"}}
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT "clients".id FROM "clients" WHERE ("clients"."name" = 'ramirito') LIMIT 1[0m
+  [4;36;1mClient Create (0.0ms)[0m   [0;1mINSERT INTO "clients" ("name", "created_at", "updated_at") VALUES('ramirito', '2010-07-28 00:04:58', '2010-07-28 00:04:58')[0m
+Redirected to http://localhost:3000/clients
+Completed in 156ms (DB: 0) | 302 Found [http://localhost/clients]
+
+
+Processing ClientsController#index (for 127.0.0.1 at 2010-07-27 21:04:58) [GET]
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered clients/_list (15.6ms)
+Rendered commons/_session (0.0ms)
+Completed in 156ms (View: 125, DB: 0) | 200 OK [http://localhost/clients]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:05:00) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#show (for 127.0.0.1 at 2010-07-27 21:05:03) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mClient Load (15.6ms)[0m   [0;1mSELECT * FROM "clients" WHERE ("clients"."id" = 1) [0m
+Rendering template within layouts/admin_layout
+Rendering clients/show
+Rendered commons/_session (15.6ms)
+Completed in 266ms (View: 219, DB: 16) | 200 OK [http://localhost/clients/1]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:05:04) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#index (for 127.0.0.1 at 2010-07-27 21:05:11) [GET]
+  [4;35;1mClient Load (15.6ms)[0m   [0mSELECT * FROM "clients" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered clients/_list (15.6ms)
+Rendered commons/_session (15.6ms)
+Completed in 203ms (View: 156, DB: 16) | 200 OK [http://localhost/clients]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:05:12) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#edit (for 127.0.0.1 at 2010-07-27 21:05:16) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mClient Load (0.0ms)[0m   [0;1mSELECT * FROM "clients" WHERE ("clients"."id" = 1) [0m
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+Rendered clients/_form (0.0ms)
+Rendered commons/_session (15.6ms)
+Completed in 344ms (View: 250, DB: 0) | 200 OK [http://localhost/clients/1/edit]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:05:17) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#index (for 127.0.0.1 at 2010-07-27 21:05:20) [GET]
+  [4;35;1mClient Load (15.6ms)[0m   [0mSELECT * FROM "clients" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (46.9ms)
+Rendered clients/_list (31.3ms)
+Rendered commons/_session (0.0ms)
+Completed in 531ms (View: 484, DB: 16) | 200 OK [http://localhost/clients]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:05:21) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#destroy (for 127.0.0.1 at 2010-07-27 21:05:24) [DELETE]
+  Parameters: {"authenticity_token"=>"WuGCoeG5yO2VNkOgD+7iNsvCaUOiEbwMEdHtrEV4LTU=", "id"=>"2"}
+  [4;36;1mClient Load (0.0ms)[0m   [0;1mSELECT * FROM "clients" WHERE ("clients"."id" = 2) [0m
+  [4;35;1mClient Destroy (15.6ms)[0m   [0mDELETE FROM "clients" WHERE "id" = 2[0m
+Redirected to http://localhost:3000/clients
+Completed in 188ms (DB: 16) | 302 Found [http://localhost/clients/2]
+
+
+Processing ClientsController#index (for 127.0.0.1 at 2010-07-27 21:05:25) [GET]
+  [4;36;1mClient Load (0.0ms)[0m   [0;1mSELECT * FROM "clients" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered clients/_list (15.6ms)
+Rendered commons/_session (0.0ms)
+Completed in 156ms (View: 109, DB: 0) | 200 OK [http://localhost/clients]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:05:27) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ArticlesController#index (for 127.0.0.1 at 2010-07-27 21:05:32) [GET]
+  [4;35;1mArticle Load (0.0ms)[0m   [0mSELECT * FROM "articles" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (46.9ms)
+Rendered articles/_list (0.0ms)
+Rendered commons/_session (0.0ms)
+Completed in 141ms (View: 109, DB: 0) | 200 OK [http://localhost/articles]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:05:34) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ArticlesController#new (for 127.0.0.1 at 2010-07-27 21:05:36) [GET]
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+Rendered articles/_form (15.6ms)
+Rendered commons/_session (0.0ms)
+Completed in 391ms (View: 109, DB: 0) | 200 OK [http://localhost/articles/new]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:05:37) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ArticlesController#create (for 127.0.0.1 at 2010-07-27 21:05:42) [POST]
+  Parameters: {"article"=>{"name"=>"tanga"}, "commit"=>"Save", "authenticity_token"=>"WuGCoeG5yO2VNkOgD+7iNsvCaUOiEbwMEdHtrEV4LTU="}
+  [4;36;1mArticle Load (0.0ms)[0m   [0;1mSELECT "articles".id FROM "articles" WHERE ("articles"."name" = 'tanga') LIMIT 1[0m
+  [4;35;1mArticle Create (0.0ms)[0m   [0mINSERT INTO "articles" ("name", "created_at", "provider_id", "updated_at") VALUES('tanga', '2010-07-28 00:05:42', NULL, '2010-07-28 00:05:42')[0m
+Redirected to http://localhost:3000/articles
+Completed in 203ms (DB: 0) | 302 Found [http://localhost/articles]
+
+
+Processing ArticlesController#index (for 127.0.0.1 at 2010-07-27 21:05:42) [GET]
+  [4;36;1mArticle Load (15.6ms)[0m   [0;1mSELECT * FROM "articles" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (62.5ms)
+Rendered articles/_list (46.9ms)
+Rendered commons/_session (0.0ms)
+Completed in 484ms (View: 281, DB: 16) | 200 OK [http://localhost/articles]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:05:45) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ProvidersController#index (for 127.0.0.1 at 2010-07-27 21:05:49) [GET]
+  [4;35;1mProvider Load (0.0ms)[0m   [0mSELECT * FROM "providers" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered providers/_list (0.0ms)
+Rendered commons/_session (0.0ms)
+Completed in 141ms (View: 109, DB: 0) | 200 OK [http://localhost/providers]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:05:50) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ProvidersController#new (for 127.0.0.1 at 2010-07-27 21:05:53) [GET]
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+Rendered providers/_form (0.0ms)
+Rendered commons/_session (15.6ms)
+Completed in 141ms (View: 109, DB: 0) | 200 OK [http://localhost/providers/new]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:05:54) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ProvidersController#create (for 127.0.0.1 at 2010-07-27 21:06:05) [POST]
+  Parameters: {"commit"=>"Save", "authenticity_token"=>"WuGCoeG5yO2VNkOgD+7iNsvCaUOiEbwMEdHtrEV4LTU=", "provider"=>{"name"=>"garbarino"}}
+  [4;36;1mProvider Load (0.0ms)[0m   [0;1mSELECT "providers".id FROM "providers" WHERE ("providers"."name" = 'garbarino') LIMIT 1[0m
+  [4;35;1mProvider Create (15.6ms)[0m   [0mINSERT INTO "providers" ("name", "created_at", "updated_at") VALUES('garbarino', '2010-07-28 00:06:05', '2010-07-28 00:06:05')[0m
+Redirected to http://localhost:3000/providers
+Completed in 344ms (DB: 16) | 302 Found [http://localhost/providers]
+
+
+Processing ProvidersController#index (for 127.0.0.1 at 2010-07-27 21:06:05) [GET]
+  [4;36;1mProvider Load (15.6ms)[0m   [0;1mSELECT * FROM "providers" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (265.6ms)
+Rendered providers/_list (15.6ms)
+Rendered commons/_session (0.0ms)
+Completed in 469ms (View: 359, DB: 16) | 200 OK [http://localhost/providers]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:06:08) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:06:11) [GET]
+  [4;35;1mSale Load (0.0ms)[0m   [0mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered sales/_list (0.0ms)
+Rendered commons/_session (0.0ms)
+Completed in 141ms (View: 109, DB: 0) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:06:12) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#new (for 127.0.0.1 at 2010-07-27 21:06:16) [GET]
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+Rendered sales/_form (46.9ms)
+Rendered commons/_session (0.0ms)
+Completed in 172ms (View: 125, DB: 0) | 200 OK [http://localhost/sales/new]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:06:17) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:20:18) [GET]
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered sales/_list (0.0ms)
+Rendered commons/_session (0.0ms)
+Completed in 125ms (View: 94, DB: 0) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:20:20) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#new (for 127.0.0.1 at 2010-07-27 21:20:24) [GET]
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+  [4;35;1mSQL (0.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+ActionView::TemplateError (undefined method `to_select' for #<Class:0x46b95e8>) on line #1 of app/views/sales/_form.html.erb:
+1: <%= f.select :client_id, Client.to_select %>
+2: <%= f.date_select :expiration %>
+
+    app/views/sales/_form.html.erb:1
+    app/views/commons/base_form.html.erb:7
+    app/views/commons/base_form.html.erb:6
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (390.6ms)
+Rendered rescues/_request_and_response (15.6ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SalesController#new (for 127.0.0.1 at 2010-07-27 21:26:31) [GET]
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+  [4;36;1mClient Load (0.0ms)[0m   [0;1mSELECT * FROM "clients" ORDER BY name[0m
+Rendered sales/_form (93.8ms)
+Rendered commons/_session (0.0ms)
+Completed in 203ms (View: 156, DB: 0) | 200 OK [http://localhost/sales/new]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:26:33) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#create (for 127.0.0.1 at 2010-07-27 21:26:46) [POST]
+  Parameters: {"commit"=>"Save", "authenticity_token"=>"WuGCoeG5yO2VNkOgD+7iNsvCaUOiEbwMEdHtrEV4LTU=", "sale"=>{"expiration(1i)"=>"2010", "expiration(2i)"=>"7", "expiration(3i)"=>"28", "client_id"=>"1"}}
+  [4;35;1mSale Create (0.0ms)[0m   [0mINSERT INTO "sales" ("created_at", "updated_at", "expiration", "client_id") VALUES('2010-07-28 00:26:46', '2010-07-28 00:26:46', '2010-07-28', 1)[0m
+Redirected to http://localhost:3000/sales
+Completed in 188ms (DB: 0) | 302 Found [http://localhost/sales]
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:26:47) [GET]
+  [4;36;1mSale Load (15.6ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered sales/_list (218.8ms)
+Rendered commons/_session (0.0ms)
+Completed in 359ms (View: 313, DB: 16) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:26:50) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#index (for 127.0.0.1 at 2010-07-27 21:27:01) [GET]
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (46.9ms)
+Rendered clients/_list (15.6ms)
+Rendered commons/_session (0.0ms)
+Completed in 156ms (View: 109, DB: 0) | 200 OK [http://localhost/clients]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:27:02) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#new (for 127.0.0.1 at 2010-07-27 21:27:04) [GET]
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+Rendered clients/_form (0.0ms)
+Rendered commons/_session (0.0ms)
+Completed in 125ms (View: 78, DB: 0) | 200 OK [http://localhost/clients/new]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:27:05) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ClientsController#create (for 127.0.0.1 at 2010-07-27 21:27:10) [POST]
+  Parameters: {"commit"=>"Save", "authenticity_token"=>"WuGCoeG5yO2VNkOgD+7iNsvCaUOiEbwMEdHtrEV4LTU=", "client"=>{"name"=>"carlos"}}
+  [4;36;1mClient Load (0.0ms)[0m   [0;1mSELECT "clients".id FROM "clients" WHERE ("clients"."name" = 'carlos') LIMIT 1[0m
+  [4;35;1mClient Create (15.6ms)[0m   [0mINSERT INTO "clients" ("name", "created_at", "updated_at") VALUES('carlos', '2010-07-28 00:27:10', '2010-07-28 00:27:10')[0m
+Redirected to http://localhost:3000/clients
+Completed in 188ms (DB: 16) | 302 Found [http://localhost/clients]
+
+
+Processing ClientsController#index (for 127.0.0.1 at 2010-07-27 21:27:10) [GET]
+  [4;36;1mClient Load (15.6ms)[0m   [0;1mSELECT * FROM "clients" ORDER BY name[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+Rendered clients/_list (31.3ms)
+Rendered commons/_session (0.0ms)
+Completed in 172ms (View: 125, DB: 16) | 200 OK [http://localhost/clients]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:27:12) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:27:15) [GET]
+  [4;35;1mSale Load (0.0ms)[0m   [0mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (62.5ms)
+Rendered sales/_list (15.6ms)
+Rendered commons/_session (0.0ms)
+Completed in 609ms (View: 563, DB: 0) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:27:16) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#edit (for 127.0.0.1 at 2010-07-27 21:27:20) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mSale Load (15.6ms)[0m   [0;1mSELECT * FROM "sales" WHERE ("sales"."id" = 1) [0m
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" ORDER BY name[0m
+Rendered sales/_form (109.4ms)
+Rendered commons/_session (0.0ms)
+Completed in 578ms (View: 375, DB: 16) | 200 OK [http://localhost/sales/1/edit]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:27:22) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#update (for 127.0.0.1 at 2010-07-27 21:27:26) [PUT]
+  Parameters: {"commit"=>"Save", "authenticity_token"=>"WuGCoeG5yO2VNkOgD+7iNsvCaUOiEbwMEdHtrEV4LTU=", "id"=>"1", "sale"=>{"expiration(1i)"=>"2010", "expiration(2i)"=>"7", "expiration(3i)"=>"28", "client_id"=>"3"}}
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" WHERE ("sales"."id" = 1) [0m
+  [4;35;1mSale Update (0.0ms)[0m   [0mUPDATE "sales" SET "updated_at" = '2010-07-28 00:27:26', "client_id" = 3 WHERE "id" = 1[0m
+Redirected to http://localhost:3000/sales/1
+Completed in 219ms (DB: 0) | 302 Found [http://localhost/sales/1]
+
+
+Processing SalesController#show (for 127.0.0.1 at 2010-07-27 21:27:26) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" WHERE ("sales"."id" = 1) [0m
+Rendering template within layouts/admin_layout
+Rendering sales/show
+Rendered commons/_session (0.0ms)
+Completed in 172ms (View: 109, DB: 0) | 200 OK [http://localhost/sales/1]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:27:28) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:28:41) [GET]
+  [4;35;1mSale Load (0.0ms)[0m   [0mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (234.4ms)
+Rendered sales/_list (15.6ms)
+Rendered commons/_session (0.0ms)
+Completed in 438ms (View: 313, DB: 0) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:28:43) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:31:39) [GET]
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+Rendered sales/_list (62.5ms)
+Rendered commons/_session (0.0ms)
+Completed in 219ms (View: 172, DB: 0) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:31:42) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:33:58) [GET]
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+
+ActionView::TemplateError (undefined method `total' for #<Sale:0x45fb2e0>) on line #1 of app/views/sales/_list.html.erb:
+1: <%= list_builder_for @records do |list|
+2:       list.client :with => :name
+3:       list.expiration
+4:       list.total
+
+    app/views/sales/_list.html.erb:1
+    app/views/commons/index.html.erb:3
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (203.1ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:35:31) [GET]
+  [4;36;1mSale Load (31.3ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (93.8ms)
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+Rendered sales/_list (234.4ms)
+Rendered commons/_session (0.0ms)
+Completed in 781ms (View: 609, DB: 31) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:35:35) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:35:45) [GET]
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+Rendered sales/_list (46.9ms)
+Rendered commons/_session (0.0ms)
+Completed in 203ms (View: 156, DB: 0) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:35:48) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#edit (for 127.0.0.1 at 2010-07-27 21:35:54) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" WHERE ("sales"."id" = 1) [0m
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" ORDER BY name[0m
+Rendered sales/_form (328.1ms)
+Rendered commons/_session (0.0ms)
+Completed in 438ms (View: 391, DB: 0) | 200 OK [http://localhost/sales/1/edit]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:35:55) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:36:23) [GET]
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+Rendered sales/_list (62.5ms)
+Rendered commons/_session (0.0ms)
+Completed in 188ms (View: 141, DB: 0) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:36:24) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:38:18) [GET]
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+
+ActionView::TemplateError (stack level too deep) on line #1 of app/views/sales/_list.html.erb:
+1: <%= list_builder_for @records do |list|
+2:       list.client :with => :name
+3:       list.expiration
+4:       list.total
+
+    app/models/sale.rb:6:in `total'
+    app/models/sale.rb:6:in `total'
+    app/views/sales/_list.html.erb:1
+    app/views/commons/index.html.erb:3
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (453.1ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:38:32) [GET]
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+
+ActionView::TemplateError (stack level too deep) on line #1 of app/views/sales/_list.html.erb:
+1: <%= list_builder_for @records do |list|
+2:       list.client :with => :name
+3:       list.expiration
+4:       list.total
+
+    app/models/sale.rb:6:in `total'
+    app/models/sale.rb:6:in `total'
+    app/views/sales/_list.html.erb:1
+    app/views/commons/index.html.erb:3
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (203.1ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:38:38) [GET]
+  [4;36;1mSale Load (15.6ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+
+ActionView::TemplateError (stack level too deep) on line #1 of app/views/sales/_list.html.erb:
+1: <%= list_builder_for @records do |list|
+2:       list.client :with => :name
+3:       list.expiration
+4:       list.total
+
+    app/models/sale.rb:6:in `total'
+    app/models/sale.rb:6:in `total'
+    app/views/sales/_list.html.erb:1
+    app/views/commons/index.html.erb:3
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (203.1ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:39:02) [GET]
+  [4;36;1mSale Load (15.6ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+
+ActionView::TemplateError (stack level too deep) on line #1 of app/views/sales/_list.html.erb:
+1: <%= list_builder_for @records do |list|
+2:       list.client :with => :name
+3:       list.expiration
+4:       list.total
+
+    app/models/sale.rb:6:in `total'
+    app/models/sale.rb:6:in `total'
+    app/views/sales/_list.html.erb:1
+    app/views/commons/index.html.erb:3
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (203.1ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:39:11) [GET]
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+  [4;35;1mClient Load (15.6ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+
+ActionView::TemplateError (stack level too deep) on line #1 of app/views/sales/_list.html.erb:
+1: <%= list_builder_for @records do |list|
+2:       list.client :with => :name
+3:       list.expiration
+4:       list.total
+
+    app/models/sale.rb:6:in `total'
+    app/models/sale.rb:6:in `total'
+    app/views/sales/_list.html.erb:1
+    app/views/commons/index.html.erb:3
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (421.9ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:39:21) [GET]
+  [4;36;1mSale Load (15.6ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+
+ActionView::TemplateError (stack level too deep) on line #1 of app/views/sales/_list.html.erb:
+1: <%= list_builder_for @records do |list|
+2:       list.client :with => :name
+3:       list.expiration
+4:       list.total
+
+    app/models/sale.rb:6:in `total'
+    app/models/sale.rb:6:in `total'
+    app/views/sales/_list.html.erb:1
+    app/views/commons/index.html.erb:3
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (218.8ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:39:27) [GET]
+  [4;36;1mSale Load (15.6ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (296.9ms)
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+
+ActionView::TemplateError (stack level too deep) on line #1 of app/views/sales/_list.html.erb:
+1: <%= list_builder_for @records do |list|
+2:       list.client :with => :name
+3:       list.expiration
+4:       list.total
+
+    app/models/sale.rb:6:in `total'
+    app/models/sale.rb:6:in `total'
+    app/views/sales/_list.html.erb:1
+    app/views/commons/index.html.erb:3
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (203.1ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:39:35) [GET]
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+Rendered sales/_list (62.5ms)
+Rendered commons/_session (0.0ms)
+Completed in 203ms (View: 156, DB: 0) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:39:37) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#edit (for 127.0.0.1 at 2010-07-27 21:40:05) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" WHERE ("sales"."id" = 1) [0m
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+  [4;35;1mClient Load (15.6ms)[0m   [0mSELECT * FROM "clients" ORDER BY name[0m
+Rendered sales/_form (125.0ms)
+Rendered commons/_session (0.0ms)
+Completed in 234ms (View: 172, DB: 16) | 200 OK [http://localhost/sales/1/edit]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:40:06) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#edit (for 127.0.0.1 at 2010-07-27 21:41:53) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mSale Load (15.6ms)[0m   [0;1mSELECT * FROM "sales" WHERE ("sales"."id" = 1) [0m
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+  [4;35;1mClient Load (0.0ms)[0m   [0mSELECT * FROM "clients" ORDER BY name[0m
+Rendered sales/_form (109.4ms)
+Rendered commons/_session (15.6ms)
+Completed in 219ms (View: 188, DB: 16) | 200 OK [http://localhost/sales/1/edit]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:41:56) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#update (for 127.0.0.1 at 2010-07-27 21:42:07) [PUT]
+  Parameters: {"commit"=>"Save", "authenticity_token"=>"WuGCoeG5yO2VNkOgD+7iNsvCaUOiEbwMEdHtrEV4LTU=", "id"=>"1", "sale"=>{"total"=>"12", "expiration(1i)"=>"2010", "expiration(2i)"=>"7", "expiration(3i)"=>"28", "client_id"=>"3"}}
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" WHERE ("sales"."id" = 1) [0m
+
+ActiveRecord::UnknownAttributeError (unknown attribute: total):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (125.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SalesController#update (for 127.0.0.1 at 2010-07-27 21:43:36) [PUT]
+  Parameters: {"commit"=>"Save", "authenticity_token"=>"WuGCoeG5yO2VNkOgD+7iNsvCaUOiEbwMEdHtrEV4LTU=", "id"=>"1", "sale"=>{"total"=>"12", "expiration(1i)"=>"2010", "expiration(2i)"=>"7", "expiration(3i)"=>"28", "client_id"=>"3"}}
+  [4;35;1mSale Load (0.0ms)[0m   [0mSELECT * FROM "sales" WHERE ("sales"."id" = 1) [0m
+
+ActiveRecord::UnknownAttributeError (unknown attribute: total):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (125.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SalesController#update (for 127.0.0.1 at 2010-07-27 21:43:46) [PUT]
+  Parameters: {"commit"=>"Save", "authenticity_token"=>"WuGCoeG5yO2VNkOgD+7iNsvCaUOiEbwMEdHtrEV4LTU=", "id"=>"1", "sale"=>{"total"=>"12", "expiration(1i)"=>"2010", "expiration(2i)"=>"7", "expiration(3i)"=>"28", "client_id"=>"3"}}
+  [4;36;1mSale Load (0.0ms)[0m   [0;1mSELECT * FROM "sales" WHERE ("sales"."id" = 1) [0m
+
+ActiveRecord::UnknownAttributeError (unknown attribute: total):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (125.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SalesController#index (for 127.0.0.1 at 2010-07-27 21:43:50) [GET]
+  [4;35;1mSale Load (0.0ms)[0m   [0mSELECT * FROM "sales" ORDER BY expiration DESC[0m
+Rendering template within layouts/admin_layout
+Rendering commons/index
+Rendered commons/_search_form (31.3ms)
+  [4;36;1mClient Load (0.0ms)[0m   [0;1mSELECT * FROM "clients" WHERE ("clients"."id" = 3) [0m
+Rendered sales/_list (62.5ms)
+Rendered commons/_session (0.0ms)
+Completed in 188ms (View: 156, DB: 0) | 200 OK [http://localhost/sales]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:43:51) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing SalesController#edit (for 127.0.0.1 at 2010-07-27 21:43:55) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mSale Load (0.0ms)[0m   [0mSELECT * FROM "sales" WHERE ("sales"."id" = 1) [0m
+Rendering template within layouts/admin_layout
+Rendering commons/base_form
+  [4;36;1mClient Load (0.0ms)[0m   [0;1mSELECT * FROM "clients" ORDER BY name[0m
+Rendered sales/_form (140.6ms)
+Rendered commons/_session (15.6ms)
+Completed in 422ms (View: 391, DB: 0) | 200 OK [http://localhost/sales/1/edit]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-27 21:43:56) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/admin_custom.css" with {:method=>:get}):
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
